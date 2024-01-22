@@ -1,0 +1,9 @@
+---
+
+- name: Ensure collectd service is Enabled and Started
+  ansible.builtin.service:
+    name: collectd
+    enabled: yes
+    state: started
+  become: yes
+

@@ -1,0 +1,14 @@
+---
+
+- name: Check SELinux status
+  ansible.builtin.command: getenforce
+  register: selinux_status
+  changed_when: false
+
+- name: Disable SELinux
+  ansible.builtin.selinux:
+    state: disabled
+  when: selinux_status.stdout != "Disabled" and disable_selinux
+  notify: "reboot_system"
+  become: yes
+

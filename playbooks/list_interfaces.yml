@@ -1,0 +1,11 @@
+- name: Gather network interfaces of managed nodes
+  hosts: managed_nodes
+  tasks:
+    - name: Get interfaces
+      ansible.builtin.setup:
+        filter: ansible_interfaces
+
+    - name: Print interfaces
+      debug:
+        var: ansible_interfaces
+

@@ -1,0 +1,9 @@
+---
+# handlers file for ./roles/collectd
+
+- name: restart_collectd
+  ansible.builtin.service:
+    name: collectd
+    state: restarted
+  become: yes
+

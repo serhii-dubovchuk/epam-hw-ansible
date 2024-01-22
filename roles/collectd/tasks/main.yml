@@ -1,0 +1,19 @@
+---
+# tasks file for ./roles/collectd
+
+- name: Include packages installation tasks
+  ansible.builtin.include_tasks: packages.yml
+  when: collectd_action == 'install'
+
+- name: Include collectd Prometheus configuration tasks
+  ansible.builtin.include_tasks: prometheus.yml
+  when: collectd_action == 'install'
+
+- name: Include collectd status check tasks
+  ansible.builtin.include_tasks: ensure_collectd_state.yml
+  when: collectd_action == 'install'
+
+- name: Include collectd removal tasks
+  ansible.builtin.include_tasks: remove_collectd.yml
+  when: collectd_action == 'remove'
+

@@ -1,0 +1,6 @@
+---
+# defaults file for ./roles/common
+
+install_packages: false
+disable_selinux: false
+

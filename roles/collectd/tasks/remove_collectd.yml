@@ -1,0 +1,29 @@
+---
+
+- name: Stop and disable collectd service
+  ansible.builtin.service:
+    name: collectd
+    enabled: no
+    state: stopped
+  when: collectd_action == 'remove'
+  become: yes
+
+- name: Remove collectd packages
+  ansible.builtin.package:
+    name:
+      - collectd
+      - collectd-write_prometheus
+    state: absent
+  when: collectd_action == 'remove'
+  become: yes
+
+- name: Remove collectd configuration files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/collectd/collectd.conf.d
+    - /etc/collectd
+  when: collectd_action == 'remove'
+  become: yes
+

@@ -1,0 +1,17 @@
+---
+
+- name: Install collectd and plugins
+  ansible.builtin.package:
+    name:
+      - collectd
+      - collectd-core
+    state: latest
+  register: package_status
+  become: yes
+  notify: restart_collectd
+  changed_when: package_status is changed
+
+- name: Emit service restart if collectd is updated
+  ansible.builtin.meta: flush_handlers
+  when: package_status is changed
+

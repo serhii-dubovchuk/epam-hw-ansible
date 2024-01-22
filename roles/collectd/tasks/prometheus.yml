@@ -1,0 +1,17 @@
+---
+
+- name: Configure collectd Prometheus Write exporter
+  ansible.builtin.template:
+    src: collectd_prometheus.conf.j2
+    dest: /etc/collectd/collectd.conf.d/prometheus.conf
+    owner: root
+    group: root
+    mode: '0644'
+  register: files_copied
+  notify: restart_collectd
+  become: yes
+
+- name: Emit service restart when config is updated
+  ansible.builtin.meta: flush_handlers
+  when: files_copied is changed
+

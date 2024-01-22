@@ -1,0 +1,9 @@
+---
+# tasks file for ./roles/common
+
+- name: Include package installation tasks
+  ansible.builtin.include_tasks: packages.yml
+
+- name: Include SELinux disabling tasks
+  ansible.builtin.include_tasks: selinux.yml
+

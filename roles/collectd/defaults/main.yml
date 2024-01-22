@@ -1,0 +1,6 @@
+---
+# defaults file for ./roles/collectd
+
+collectd_prometheus_port: 9103
+collectd_action: 'install'
+

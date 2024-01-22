@@ -1,0 +1,8 @@
+---
+# handlers file for ./roles/common
+
+- name: Reboot system
+  ansible.builtin.reboot:
+  when: disable_selinux
+  listen: "reboot_system"
+
