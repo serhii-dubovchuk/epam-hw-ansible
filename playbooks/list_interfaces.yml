@@ -1,11 +1,16 @@
 - name: Gather network interfaces of managed nodes
   hosts: managed_nodes
+  gather_facts: false
   tasks:
     - name: Get interfaces
       ansible.builtin.setup:
-        filter: ansible_interfaces
+        gather_subset:
+          - '!all'
+          - 'min'
+          - 'network'
+      register: net_info
 
     - name: Print interfaces
       debug:
-        var: ansible_interfaces
+        var: net_info.ansible_facts.ansible_interfaces
 

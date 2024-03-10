@@ -11,7 +11,3 @@
   notify: restart_collectd
   changed_when: package_status is changed
 
-- name: Emit service restart if collectd is updated
-  ansible.builtin.meta: flush_handlers
-  when: package_status is changed
-
